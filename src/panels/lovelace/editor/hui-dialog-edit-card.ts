@@ -2,9 +2,21 @@ import { html, LitElement, PropertyDeclarations } from "@polymer/lit-element";
 import { TemplateResult } from "lit-html";
 
 import { HomeAssistant } from "../../../types";
+import { HASSDomEvent } from "../../../common/dom/fire_event";
 import { LovelaceCardConfig } from "../types";
 import "./hui-edit-card";
 import "./hui-migrate-config";
+
+declare global {
+  // for fire event
+  interface HASSDomEvents {
+    "reload-lovelace": undefined;
+  }
+  // for add event listener
+  interface HTMLElementEventMap {
+    "reload-lovelace": HASSDomEvent<undefined>;
+  }
+}
 
 export class HuiDialogEditCard extends LitElement {
   protected _hass?: HomeAssistant;
